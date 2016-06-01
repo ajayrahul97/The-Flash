@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class GameRenderer {
 
     private GameWorld myWorld;
-    private OrthographicCamera cam;
+    public static OrthographicCamera cam;
     private ShapeRenderer shapeRenderer;
 
 
@@ -26,45 +26,26 @@ public class GameRenderer {
 
     public void render() {
         Gdx.app.log("GameRenderer", "render");
-         /*
-         * 1. We draw a black background. This prevents flickering.
-         */
+         //Draw a black background.
 
         Gdx.gl.glClearColor(0,0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /*
-         * 2. We draw the Filled rectangle
-         */
-
+        //Draw the Filled rectangle
         // Tells shapeRenderer to begin drawing filled shapes
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        // Chooses RGB Color of 87, 109, 120 at full opacity
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);        // Chooses RGB Color of 87, 109, 120 at full opacity
         shapeRenderer.setColor(87 / 255.0f, 109 / 255.0f, 120 / 255.0f, 1);
 
         // Draws the circle from myWorld (Using ShapeType.Filled)
-        shapeRenderer.circle(myWorld.getCirc().x, myWorld.getCirc().y,
-                myWorld.getCirc().radius);
-
-        // Tells the shapeRenderer to finish rendering
-        // We MUST do this every time.
+        shapeRenderer.circle(myWorld.flash.postion.x,myWorld.flash.postion.y,myWorld.flash.radius);
         shapeRenderer.end();
 
-        /*
-         * 3. We draw the circle's outline
-         */
 
+         //Circle's outline
         // Tells shapeRenderer to draw an outline of the following shapes
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-
-        // Chooses RGB Color of 255, 109, 120 at full opacity
-        shapeRenderer.setColor(255 / 255.0f, 109 / 255.0f, 120 / 255.0f, 1);
-
-        // Draws the rectangle from myWorld (Using ShapeType.Line)
-        shapeRenderer.circle(myWorld.getCirc().x, myWorld.getCirc().y,
-                myWorld.getCirc().radius);
-
+        shapeRenderer.setColor(255 / 255.0f, 109 / 255.0f, 120 / 255.0f, 1);           // Chooses RGB Color of 255, 109, 120 at full opacity
+        shapeRenderer.circle(myWorld.flash.postion.x,myWorld.flash.postion.y,myWorld.flash.radius);         // Draws the circle from myWorld (Using ShapeType.Line)
         shapeRenderer.end();
 
     }

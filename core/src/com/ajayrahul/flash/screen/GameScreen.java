@@ -2,6 +2,7 @@ package com.ajayrahul.flash.screen;
 
 import com.ajayrahul.flash.gameworld.GameRenderer;
 import com.ajayrahul.flash.gameworld.GameWorld;
+import com.ajayrahul.flash.helpers.InputHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,13 +12,17 @@ import com.badlogic.gdx.graphics.GL20;
  */
 public class GameScreen implements Screen {
 
+    public static boolean isTouched;
     private GameWorld world;
     private GameRenderer renderer;
 
     public GameScreen() {
         Gdx.app.log("GameScreen","Created");
+        isTouched = false;
         world = new GameWorld(); // initialize world
         renderer = new GameRenderer(world); // initialize renderer
+        Gdx.input.setInputProcessor(new InputHandler());
+
 
     }
 
